@@ -1,0 +1,20 @@
+@echo off
+
+REM Set the DNS servers to Quad9
+netsh interface ipv4 set dns "Wi-Fi" static 9.9.9.9 primary
+netsh interface ipv4 set dns "Wi-Fi" static 149.112.112.112 index=2
+netsh interface ipv6 set dns "Wi-Fi" static fc00:e968:6179::de52:7100 primary
+netsh interface ipv6 set dns "Wi-Fi" static fc00:e968:6179::de52:7000 index=2
+
+REM Enable IPv6 privacy
+netsh interface ipv6 set privacy state=enable
+
+REM Flush the DNS cache
+ipconfig /flushdns
+
+REM Open ipleak.net in the default browser
+start "" "https://ipleak.net/"
+
+REM Display a completion message
+echo "DNS successfully configured to use Quad9 with IPv6 privacy enabled."
+pause
